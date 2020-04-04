@@ -1,4 +1,4 @@
-package arcanoid;
+package arkanoid;
 
 public class Ball
 {

@@ -1,4 +1,4 @@
-package arcanoid;
+package arkanoid;
 
 import acm.graphics.GPoint;
 import acm.graphics.GRect;

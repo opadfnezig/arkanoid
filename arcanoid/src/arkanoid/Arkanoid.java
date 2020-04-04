@@ -1,10 +1,10 @@
-package arcanoid;
+package arkanoid;
 
 import java.awt.event.*;
 import acm.graphics.GPoint;
 import acm.program.GraphicsProgram;
 
-public class Arcanoid extends GraphicsProgram implements MouseListener
+public class Arkanoid extends GraphicsProgram implements MouseListener
 {
 	public static int width;
 	public static int height;
