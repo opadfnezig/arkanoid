@@ -1,9 +1,10 @@
 package arcanoid;
 
+import java.awt.event.*;
 import acm.graphics.GPoint;
 import acm.program.GraphicsProgram;
 
-public class Arcanoid extends GraphicsProgram
+public class Arcanoid extends GraphicsProgram implements MouseListener
 {
 	public static int width;
 	public static int height;
@@ -19,9 +20,15 @@ public class Arcanoid extends GraphicsProgram
 	public void run()
 	{
 		setup();
+		init();
 		levelSetup();
 		
 		//render();
+	}
+	
+	public void init()
+	{
+		addMouseListeners();
 	}
 	
 	private void render()
@@ -45,18 +52,16 @@ public class Arcanoid extends GraphicsProgram
 		xSpacing = ySpacing = 10;
 		
 		bricks = new Brick[15];
-		
-		
 	}
 	
 	private void levelSetup()
 	{
 		/*Brick brick = new Brick(new GPoint(50,50));
 		add(brick.getGRect());*/
-		for(int y = ySpacing,bricksPlaced = 0;y < (brickCount/brickLineLengh+1)*ySpacing;y += ySpacing)
-			for(int x = xSpacing;(x<brickLineLengh*xSpacing+1)&&(brickCount - bricksPlaced != 0);x += xSpacing, ++bricksPlaced)
+		//for(int y = ySpacing;y < (brickCount/brickLineLengh+1)*ySpacing;y += ySpacing)
+			for(int x = xSpacing,bricksPlaced = 0;(x<brickLineLengh*xSpacing+1)&&(brickCount - bricksPlaced != 0);x += xSpacing+Brick.getWidth(), ++bricksPlaced)
 			{
-				bricks[bricksPlaced] = new Brick(new GPoint(x,y));
+				bricks[bricksPlaced] = new Brick(new GPoint(x,xSpacing));
 				add(bricks[bricksPlaced].getGRect());
 			}
 				
@@ -64,8 +69,41 @@ public class Arcanoid extends GraphicsProgram
 	
 	public static void onClick(int x,int y)
 	{
+		
+	}
+	
+	public void mouseClicked(MouseEvent arg0)
+	{
 		for(int i = 0;i<bricks.length;++i)
-			if(bricks[i].ifPointInBrick(x, y))
+			if(bricks[i].ifPointInBrick(arg0.getX(), arg0.getY()))
 				bricks[i].setVisible(false);
-	}		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }
