@@ -58,7 +58,7 @@ public class Arcanoid extends GraphicsProgram implements MouseListener
 	{
 		/*Brick brick = new Brick(new GPoint(50,50));
 		add(brick.getGRect());*/
-		//for(int y = ySpacing;y < (brickCount/brickLineLengh+1)*ySpacing;y += ySpacing)
+		//for(int  y = ySpacing;y < (brickCount/brickLineLengh+1)*ySpacing;y += ySpacing)
 			for(int x = xSpacing,bricksPlaced = 0;(x<brickLineLengh*xSpacing+1)&&(brickCount - bricksPlaced != 0);x += xSpacing+Brick.getWidth(), ++bricksPlaced)
 			{
 				bricks[bricksPlaced] = new Brick(new GPoint(x,xSpacing));
