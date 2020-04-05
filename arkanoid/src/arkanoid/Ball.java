@@ -21,7 +21,7 @@ public class Ball {
 
 	public void ballMoving() {
 		while (ball.getX() < height) {
-			//moveBall();
+			// smoveBall();
 			//checkForCollision();
 			//pause(DELAY);
 		}
