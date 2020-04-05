@@ -23,8 +23,6 @@ public class Brick
 	public static void setWidth(int width_) { width = width_; }
 	public static void setHeight(int height_) { height = height_; }
 	
-	
-	
 	public boolean ifPointInBrick(int x,int y)
 	{
 		if(rect.contains(x,y))

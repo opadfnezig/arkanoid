@@ -1,12 +1,13 @@
 package arkanoid;
 
+import java.awt.RenderingHints.Key;
 import java.awt.event.*;
 
 import acm.graphics.GOval;
 import acm.graphics.GPoint;
 import acm.program.GraphicsProgram;
 
-public class Arkanoid extends GraphicsProgram implements KeyListener
+public class Arkanoid extends GraphicsProgram
 {
 	public static int width;
 	public static int height;
@@ -19,11 +20,10 @@ public class Arkanoid extends GraphicsProgram implements KeyListener
 	private static int brickLineLengh = 10;
 	private static Brick bricks[];
 	
+	private static UserInput inputListener;
+	private static Board board;
 	public void run()
 	{
-		setup();
-		addKeyListeners();
-		addMouseListeners();
 		levelSetup();
 		
 		//render();
@@ -39,24 +39,32 @@ public class Arkanoid extends GraphicsProgram implements KeyListener
 		}
 	}
 
-	private void setup() 
+	public void init()
 	{
+		//listeners
+		//inputListener = new UserInput();
+		//addMouseListener(inputListener);
+		//addKeyListener(inputListener);
+		addMouseListeners();
+		addKeyListeners();
+		//window
 		width = 1000;
 		height = 500;
+		this.setSize(width,height);
+		//bricks
 		Brick.setWidth(50);
 		Brick.setHeight(20);
-		this.setSize(width,height);
 		brickCount = 40;
 		xSpacing = Brick.getWidth() + spacing;
 		ySpacing = Brick.getHeight() + spacing;
 		spacing = 10;
 		bricks = new Brick[brickCount];
+		board = new Board(0,height-30,100,20);
+		add(board.getBoard());
 	}
 	
 	private void levelSetup()
 	{
-		/*Brick brick = new Brick(new GPoint(50,50));
-		add(brick.getGRect());*/
 		for(int  y = 1,bricksPlaced = 0;(y < brickCount/brickLineLengh+1)&&(brickCount - bricksPlaced != 0);++y)
 			for(int x = 0;(x<brickLineLengh+1)&&(brickCount - bricksPlaced != 0);++x, ++bricksPlaced)
 			{
@@ -73,8 +81,6 @@ public class Arkanoid extends GraphicsProgram implements KeyListener
 				return bricks[i];
 		return null;
 	}
-	
-	
 	public void mouseClicked(MouseEvent arg0)
 	{
 		for(int i = 0;i<bricks.length;++i)
@@ -84,13 +90,16 @@ public class Arkanoid extends GraphicsProgram implements KeyListener
 	
 	public void keyPressed(KeyEvent arg0)
 	{
-		bricks[0].setVisible(false);
-		int key = arg0.getKeyCode();
-		switch(key)
+		switch(arg0.getKeyCode())
 		{
 		case KeyEvent.VK_RIGHT:
-			
-		break;
-		}	
+			board.right(width);
+			break;
+		case KeyEvent.VK_LEFT:
+			board.left();
+			break;
+		}
+        
 	}
+	
 }
