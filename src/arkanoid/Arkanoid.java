@@ -9,7 +9,11 @@ import acm.program.GraphicsProgram;
 
 public class Arkanoid extends GraphicsProgram
 {
+	private static final int WINDOW_WIDTH = 1000;
+	private static final int WINDOW_HEIGHT = 800;
+	
 	private boolean end;
+	private boolean pause;
 	
 	private Ball ball;
 	private Board board;
@@ -18,31 +22,64 @@ public class Arkanoid extends GraphicsProgram
 	public void run()
 	{
 		setup();
+		addMouseListeners();
+		addKeyListeners();
 		while(end)
 		{
-			draw();
-			input();
 			logic();
 		}
 	}
 	
 	public void setup()
 	{
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		
+		end = false;
+		pause = false;
+		
+		//menu = new Menu();
+	}
+	
+	public void mouseClicked(MouseEvent e) 
+	{
+		if(menu != null)
+		{
+			if(menu.pressButton(new GPoint(e.getPoint())))
+			{
+				remove(menu);
+				menu = null;
+			}
+		}
+		else
+		{
+			pause = !pause;
+		}
 		
 	}
 	
-	public void draw()
+	public void keyPressed(KeyEvent e)
 	{
-		
-	}
-	
-	public void input()
-	{
-		
+		if(menu == null && !pause)
+		{
+			
+		}
 	}
 	
 	public void logic()
 	{
-		
+		if(menu == null && !pause)
+		{
+			ball.moveBall();
+			checkCollsion();
+		}
+	}
+	
+	public void checkCollsion()
+	{
+		if(ball.getX() <= 0)
+			ball.hit(true);
+		else if(ball.getX()+ball.getWidth() >= WINDOW_WIDTH)
+			ball.hit(true);
+		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20 && ball.getX()-ball.getWidth() >= board.get)
 	}
 }
