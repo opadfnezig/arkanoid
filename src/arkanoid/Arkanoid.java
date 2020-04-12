@@ -18,7 +18,7 @@ public class Arkanoid extends GraphicsProgram
 	private static int spacing;
 	
 	private static int brickLineLengh = 10;
-	private static Menu menu;
+	private static Brick bricks[];
 	
 	private static Board board;
 	private static Ball ball;

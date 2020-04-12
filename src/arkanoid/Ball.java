@@ -1,47 +1,60 @@
 package arkanoid;
 
 import acm.graphics.*;
-import acm.program.*;
-import java.awt.*; 
-import java.awt.event.*; 
-public class Ball {
-	GOval ball;
-	public static int ball_speed = 5;
-	public static int ball_radius = 20;
-	private static int width;
-	private static int height;
 
-	public Ball(int x, int y, int ball_radius) {
-		ball = new GOval(x, y, ball_radius, ball_radius);
+public class Ball extends GImage{
+	private double speed, angle;
+	private double radius;
+	
+	//startAngle in radians
+	public Ball(String path, double r, double startSpeed, double startAngle)
+	{
+		super(path);
+		this.scale(r/this.getWidth(), r/this.getHeight());
+		radius = r;
+		speed = startSpeed;
+		angle = startAngle;
 	}
-
-	public GOval getBall() {
-		return ball;
+	
+	public void moveBall()
+	{
+		this.move(speed*Math.cos(angle), speed*Math.sin(angle));
+		speed+=0.000001;
 	}
-
-	public void ballMoving() {
-		while (ball.getX() < height) {
-			// smoveBall();
-			//checkForCollision();
-			//pause(DELAY);
+	
+	public double getAngle()
+	{
+		return angle;
+	}
+	
+	public double getSpeed()
+	{
+		return speed;
+	}
+	
+	public void hit(boolean vertical)
+	{
+		if(vertical)
+		{
+			if(angle >= 0 && angle <= Math.PI/2)
+				angle = Math.PI - angle;
+			else if(angle >= Math.PI/2 && angle <= Math.PI)
+				angle = Math.PI - angle;
+			else if(angle >= Math.PI && angle <= 3*Math.PI/2)
+				angle+=2*(3*Math.PI/2 - angle); 
+			else
+				angle = (2*Math.PI - angle) + Math.PI;
+		}
+		else
+		{
+			if(angle >= 0 && angle <= Math.PI/2)
+				angle = 2*Math.PI - angle;
+			else if(angle >= Math.PI/2 && angle <= Math.PI)
+				angle+=2*(Math.PI - angle);
+			else if(angle >= Math.PI && angle <= 3*Math.PI/2)
+				angle = (3*Math.PI/2 - angle) + Math.PI/2;
+			else
+				angle = 2*Math.PI - angle;
 		}
 	}
-	public void mouseClicked(MouseEvent e) { 
-		ball.move(ball_speed, -ball_speed); 
-	}
-
-	public void move(int ball_speed) {
-		ball.move(ball_speed, -ball_speed);
-		
-	}
-	public void right(int windowWidth) {
-		if (ball.getX() <= windowWidth - ball.getWidth())
-			ball.move(10, 0);
-	}
-
-	public void left() {
-		if (ball.getX() >= 0)
-			ball.move(-10, 0);
-	}
-
 }
