@@ -38,6 +38,9 @@ public class Arkanoid extends GraphicsProgram
 		end = false;
 		pause = false;
 		
+		Level level = new Level(1,WINDOW_WIDTH,WINDOW_HEIGHT);
+		add(level,0,0);
+		
 		//menu = new Menu();
 	}
 	
