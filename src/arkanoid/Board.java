@@ -23,7 +23,7 @@ public class Board extends GImage{
 		this.scale(GROW_K, 1);
 	}
 	
-	public void decriase()
+	public void decrease()
 	{
 		this.scale((double)2/3, 1);
 	}
