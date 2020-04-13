@@ -80,6 +80,7 @@ public class Arkanoid extends GraphicsProgram
 			ball.hit(true);
 		else if(ball.getX()+ball.getWidth() >= WINDOW_WIDTH)
 			ball.hit(true);
-		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20 && ball.getX()-ball.getWidth() >= board.get)
+		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20 && ball.getX()-ball.getWidth() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
+			ball.hit(false);
 	}
 }
