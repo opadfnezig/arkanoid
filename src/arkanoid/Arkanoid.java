@@ -3,6 +3,7 @@ package arkanoid;
 import java.awt.RenderingHints.Key;
 import java.awt.event.*;
 
+import acm.graphics.GObject;
 import acm.graphics.GOval;
 import acm.graphics.GPoint;
 import acm.program.GraphicsProgram;
@@ -61,7 +62,10 @@ public class Arkanoid extends GraphicsProgram
 	{
 		if(menu == null && !pause)
 		{
-			
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+				board.moveRight();
+			if(e.getKeyCode() == KeyEvent.VK_LEFT)
+				board.moveLeft();
 		}
 	}
 	
@@ -82,5 +86,11 @@ public class Arkanoid extends GraphicsProgram
 			ball.hit(true);
 		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20 && ball.getX()-ball.getWidth() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
 			ball.hit(false);
+		GObject collObj = getElementAt(ball.getX(), ball.getY());
+		if(collObj.getClass() == Brick.class)
+		{
+			remove(collObj);
+			ball.hit(false);
+		}
 	}
 }
