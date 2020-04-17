@@ -40,8 +40,10 @@ public class Arkanoid extends GraphicsProgram
 		
 		end = false;
 		pause = false;
-		
+
 		s_hit = new Sound(new File("hit.wav"));
+		Level level = new Level(1,WINDOW_WIDTH,WINDOW_HEIGHT);
+		add(level,0,0);
 		
 		//menu = new Menu();
 	}
