@@ -16,6 +16,8 @@ public class Arkanoid extends GraphicsProgram
 	private boolean end;
 	private boolean pause;
 	
+	private int ballCount = 3;
+	
 	private Ball ball;
 	private Board board;
 	private Menu menu;
