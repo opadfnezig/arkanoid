@@ -2,6 +2,7 @@ package arkanoid;
 
 import java.awt.RenderingHints.Key;
 import java.awt.event.*;
+import java.io.File;
 
 import acm.graphics.GObject;
 import acm.graphics.GOval;
@@ -20,6 +21,8 @@ public class Arkanoid extends GraphicsProgram
 	private Board board;
 	private Menu menu;
 	
+	private Sound s_hit;
+	
 	public void run()
 	{
 		setup();
@@ -37,6 +40,8 @@ public class Arkanoid extends GraphicsProgram
 		
 		end = false;
 		pause = false;
+		
+		s_hit = new Sound(new File("hit.wav"));
 		
 		//menu = new Menu();
 	}
