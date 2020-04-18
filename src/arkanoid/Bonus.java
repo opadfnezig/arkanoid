@@ -42,6 +42,8 @@ public class Bonus extends GImage
 		return new Bonus("",intToEnumConverter(rand.nextInt(3)));
 	}
 	
+	public BonusType getBonusType() { return type; }
+	
 	private static BonusType intToEnumConverter(int i)
 	{
 		switch(i)

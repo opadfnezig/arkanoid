@@ -5,8 +5,8 @@ import java.awt.Event.*;
 import acm.graphics.*;
 
 public class Board extends GImage{
-	public static final double GROW_K = 1.5;
-	public static final double SPEED_K = 1.5;
+	
+	public static final double GROW_K = 2;
 	
 	private int width;
 	private int height;
@@ -43,13 +43,7 @@ public class Board extends GImage{
 	
 	public void decriase()
 	{
-		this.scale((double)2/3, 1);
+		this.scale((double)1/GROW_K, 1);
 		bonusGrow = false;
-	}
-	
-	public void speed()
-	{
-		speed*=SPEED_K;
-		bonusSpeed = true;
 	}
 }
