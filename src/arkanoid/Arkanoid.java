@@ -12,7 +12,7 @@ import arkanoid.Bonus.BonusType;
 public class Arkanoid extends GraphicsProgram
 {
 	private static final int WINDOW_WIDTH = 1000;
-	private static final int WINDOW_HEIGHT = 800;
+	private static final int WINDOW_HEIGHT = 820;
 	
 	private boolean end;
 	private boolean pause;
@@ -84,6 +84,7 @@ public class Arkanoid extends GraphicsProgram
 		{
 			ball.moveBall();
 			checkCollsion();
+			
 			checkBonus();
 		}
 	}
@@ -92,10 +93,12 @@ public class Arkanoid extends GraphicsProgram
 	{
 		if(ball.getX() <= 0)
 			ball.hit(true);
-		else if(ball.getX()+ball.getWidth() >= WINDOW_WIDTH)
+		if(ball.getX()+ball.getWidth() >= WINDOW_WIDTH)
 			ball.hit(true);
 		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20 && ball.getX()-ball.getWidth() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
 			ball.hit(false);
+		if(ball.getY() > getHeight()-20)
+			remove(ball);
 		GObject collObj = getElementAt(ball.getX(), ball.getY());
 		if(collObj.getClass() == Brick.class)
 		{
