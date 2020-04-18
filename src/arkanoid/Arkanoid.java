@@ -1,8 +1,8 @@
 package arkanoid;
 
-import java.awt.RenderingHints.Key;
+
 import java.awt.event.*;
-import java.io.File;
+
 
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
@@ -11,8 +11,8 @@ import arkanoid.Bonus.BonusType;
 
 public class Arkanoid extends GraphicsProgram
 {
-	private static final int WINDOW_WIDTH = 1000;
-	private static final int WINDOW_HEIGHT = 820;
+	public static final int WINDOW_WIDTH = 1000;
+	public static final int WINDOW_HEIGHT = 820;
 	
 	private boolean end;
 	private boolean pause;
@@ -47,7 +47,8 @@ public class Arkanoid extends GraphicsProgram
 		end = false;
 		pause = false;
 		
-		menu = new Menu(new GImage("images/background.png"), new GImage("images/logo.png"), new GImage("images/button.png"));
+		menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
+		add(menu, 0 ,0);
 		lvl = null;
 		ball = null;
 		board = null;
@@ -61,6 +62,7 @@ public class Arkanoid extends GraphicsProgram
 			{
 				remove(menu);
 				menu = null;
+				setupLevel(1);
 			}
 		}
 		else
@@ -77,7 +79,7 @@ public class Arkanoid extends GraphicsProgram
 		add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
 		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()+ball.getHeight());
 		
-		lvl= new Level(1, WINDOW_WIDTH, WINDOW_HEIGHT);
+		lvl= new Level(lv, WINDOW_WIDTH, WINDOW_HEIGHT);
 		bricks = lvl.getBricks();
 		
 		ballCount = 3;
