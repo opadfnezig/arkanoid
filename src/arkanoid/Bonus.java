@@ -9,6 +9,13 @@ public class Bonus extends GImage
 {
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
+	private static String ballPath;
+	private static String boardExtenderPath;
+	private static String boardConstricterPath;
+	
+	public static void setBallPath(String ballPath_) { ballPath = ballPath_; }
+	public static void setBoardExtenderPath(String boardExtenderPath_) { boardExtenderPath = boardExtenderPath_; }
+	public static void setboardConstricterPath(String boardConstricterPath_) { boardConstricterPath = boardConstricterPath_; }
 	
 	public static enum BonusType{
 		BALL,
