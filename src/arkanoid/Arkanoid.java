@@ -23,6 +23,8 @@ public class Arkanoid extends GraphicsProgram
 	private Board board;
 	private Menu menu;
 	
+	private Level lvl = new Level(1,WINDOW_WIDTH,WINDOW_HEIGHT);
+	
 	private RandomGenerator r_gen;
 	
 	public void run()
@@ -30,6 +32,7 @@ public class Arkanoid extends GraphicsProgram
 		setup();
 		addMouseListeners();
 		addKeyListeners();
+		add(lvl);
 		while(end)
 		{
 			logic();
