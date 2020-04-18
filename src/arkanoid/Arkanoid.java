@@ -114,7 +114,7 @@ public class Arkanoid extends GraphicsProgram
 			if(collObj.getClass() == Bonus.class)
 			{
 				Bonus bonus = (Bonus)collObj;
-				switch()
+				
 			}
 		}
 		
