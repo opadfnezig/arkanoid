@@ -110,6 +110,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void checkBonus()
 	{
-		GObject collObj = getElementAt(board.getX(), board.getY());
+		for(int i = 0; board.getWidth(); i+=Bonus)
+			GObject collObg = this.getElementAt(board.getX()+Board*i, board.getY());
 	}
 }

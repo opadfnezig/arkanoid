@@ -4,7 +4,7 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Bonus extends GImage
-{
+{	
 	public static enum BonusType{
 		BOARD_EXTENDER,
 		BOARD_CONSTRICTER,
