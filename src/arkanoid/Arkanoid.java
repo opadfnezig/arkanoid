@@ -17,11 +17,14 @@ public class Arkanoid extends GraphicsProgram
 	private boolean end;
 	private boolean pause;
 	
-	private int ballCount = 3;
+	private int bricks;
+	private int ballCount;
 	
 	private Ball ball;
 	private Board board;
+	
 	private Menu menu;
+	private Level lvl;
 	
 	private RandomGenerator r_gen;
 	
@@ -33,6 +36,7 @@ public class Arkanoid extends GraphicsProgram
 		while(end)
 		{
 			logic();
+			this.pause(10);
 		}
 	}
 	
@@ -43,7 +47,10 @@ public class Arkanoid extends GraphicsProgram
 		end = false;
 		pause = false;
 		
-		//menu = new Menu();
+		menu = new Menu(new GImage("images/background.png"), new GImage("images/logo.png"), new GImage("images/button.png"));
+		lvl = null;
+		ball = null;
+		board = null;
 	}
 	
 	public void mouseClicked(MouseEvent e) 
@@ -63,6 +70,19 @@ public class Arkanoid extends GraphicsProgram
 		
 	}
 	
+	public void setupLevel(int lv)
+	{
+		board = new Board("images/board.png", 100, 10);
+		ball = new Ball("images/ball.png", 10, 2, Math.PI/4);
+		add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
+		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()+ball.getHeight());
+		
+		lvl= new Level(1, WINDOW_WIDTH, WINDOW_HEIGHT);
+		bricks = lvl.getBricks();
+		
+		ballCount = 3;
+	}
+	
 	public void keyPressed(KeyEvent e)
 	{
 		if(menu == null && !pause)
@@ -80,8 +100,8 @@ public class Arkanoid extends GraphicsProgram
 		{
 			ball.moveBall();
 			checkCollsion();
-			
 			checkBonus();
+			checkWinOrLose();
 		}
 	}
 	
@@ -128,6 +148,28 @@ public class Arkanoid extends GraphicsProgram
 				remove(bonus);
 			}
 		}
+	}
+	
+	public void checkWinOrLose()
+	{
+		if(bricks == 0)
+		{
+			
+		}
+		if(ballCount < 1)
+		{
+			
+		}
+		if(ball == null && ballCount > 0)
+		{
+			remove(board);
+			board = new Board("images/board.png", 100, 10);
+			ball = new Ball("images/ball.png", 10, 2, Math.PI/4);
+			add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
+			add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()+ball.getHeight());
+			ballCount--;
+		}
 		
+			
 	}
 }
