@@ -6,7 +6,10 @@ import acm.graphics.GImage;
 import acm.graphics.GPoint;
 
 public class Bonus extends GImage
-{	
+{
+	public static final int WIDTH = 20;
+	public static final int HEIGHT = 20;
+	
 	public static enum BonusType{
 		BALL,
 		BOARD_EXTENDER,
