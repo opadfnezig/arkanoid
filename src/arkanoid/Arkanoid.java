@@ -25,8 +25,6 @@ public class Arkanoid extends GraphicsProgram
 	
 	private RandomGenerator r_gen;
 	
-	private Sound s_hit;
-	
 	public void run()
 	{
 		setup();
@@ -44,8 +42,6 @@ public class Arkanoid extends GraphicsProgram
 		
 		end = false;
 		pause = false;
-		
-		s_hit = new Sound(new File("hit.wav"));
 		
 		//menu = new Menu();
 	}
