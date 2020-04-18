@@ -4,9 +4,7 @@ import java.awt.RenderingHints.Key;
 import java.awt.event.*;
 import java.io.File;
 
-import acm.graphics.GObject;
-import acm.graphics.GOval;
-import acm.graphics.GPoint;
+import acm.graphics.*;
 import acm.program.GraphicsProgram;
 import acm.util.RandomGenerator;
 import arkanoid.Bonus.BonusType;
@@ -110,7 +108,15 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void checkBonus()
 	{
-		for(int i = 0; board.getWidth(); i+=Bonus)
-			GObject collObg = this.getElementAt(board.getX()+Board*i, board.getY());
+		for(int i = 0; i < board.getWidth(); i+=Bonus.WIDTH)
+		{
+			GObject collObj = this.getElementAt(board.getX()+Bonus.WIDTH*i, board.getY());
+			if(collObj.getClass() == Bonus.class)
+			{
+				Bonus bonus = (Bonus)collObj;
+				switch()
+			}
+		}
+		
 	}
 }
