@@ -15,6 +15,9 @@ public class Level extends GCompound
 		switch(lvlNumber)
 		{
 		case 1:
+			GImage back = new GImage("backgroundlvl.png");
+			back.scale(wWidth/back.getWidth(), wHeight/back.getHeight());
+			this.add(back, 0, 0);
 			for(int i = 0;i<wHeight/BRICK_HEIGHT/2;++i)
 			{
 				for(int j = 0;j<wWidth/BRICK_WIDTH;++j)
@@ -23,9 +26,6 @@ public class Level extends GCompound
 					bricks++;
 				}
 			}
-			GImage back = new GImage("backgroundlvl.png");
-			back.scale(wWidth/back.getWidth(), wHeight/back.getHeight());
-			this.add(back, 0, 0);
 		break;
 		}
 	}

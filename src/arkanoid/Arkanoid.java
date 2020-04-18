@@ -36,7 +36,6 @@ public class Arkanoid extends GraphicsProgram
 		while(end)
 		{
 			logic();
-			this.pause(10);
 		}
 	}
 	
@@ -74,13 +73,14 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void setupLevel(int lv)
 	{
+		lvl= new Level(lv, WINDOW_WIDTH, WINDOW_HEIGHT);
+		bricks = lvl.getBricks();
+		add(lvl);
+		
 		board = new Board("images/board.png", 100, 10);
 		ball = new Ball("images/ball.png", 10, 2, Math.PI/4);
 		add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
-		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()+ball.getHeight());
-		
-		lvl= new Level(lv, WINDOW_WIDTH, WINDOW_HEIGHT);
-		bricks = lvl.getBricks();
+		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());
 		
 		ballCount = 3;
 	}
@@ -89,9 +89,9 @@ public class Arkanoid extends GraphicsProgram
 	{
 		if(menu == null && !pause)
 		{
-			if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT && board.getX()+board.getWidth() < WINDOW_WIDTH)
 				board.moveRight();
-			if(e.getKeyCode() == KeyEvent.VK_LEFT)
+			if(e.getKeyCode() == KeyEvent.VK_LEFT && board.getX() > 0)
 				board.moveLeft();
 		}
 	}
