@@ -17,9 +17,6 @@ public class Bonus extends GImage
 	public static void setBoardExtenderPath(String boardExtenderPath_) { boardExtenderPath = boardExtenderPath_; }
 	public static void setboardConstricterPath(String boardConstricterPath_) { boardConstricterPath = boardConstricterPath_; }
 	
-	
-	
-	
 	public static enum BonusType{
 		BALL,
 		BOARD_EXTENDER,
