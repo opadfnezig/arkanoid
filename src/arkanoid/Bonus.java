@@ -15,7 +15,7 @@ public class Bonus extends GImage
 	
 	public static void setBallPath(String ballPath_) { ballPath = ballPath_; }
 	public static void setBoardExtenderPath(String boardExtenderPath_) { boardExtenderPath = boardExtenderPath_; }
-	public static vodi setboardConstricterPath(String boardConstricterPath_) { boardConstricterPath = boardConstricterPath_; }
+	public static void setboardConstricterPath(String boardConstricterPath_) { boardConstricterPath = boardConstricterPath_; }
 	
 	
 	
