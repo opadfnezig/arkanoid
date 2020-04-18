@@ -8,6 +8,8 @@ import acm.graphics.GObject;
 import acm.graphics.GOval;
 import acm.graphics.GPoint;
 import acm.program.GraphicsProgram;
+import acm.util.RandomGenerator;
+import arkanoid.Bonus.BonusType;
 
 public class Arkanoid extends GraphicsProgram
 {
@@ -22,6 +24,8 @@ public class Arkanoid extends GraphicsProgram
 	private Ball ball;
 	private Board board;
 	private Menu menu;
+	
+	private RandomGenerator r_gen;
 	
 	private Sound s_hit;
 	
@@ -82,6 +86,7 @@ public class Arkanoid extends GraphicsProgram
 		{
 			ball.moveBall();
 			checkCollsion();
+			checkBonus();
 		}
 	}
 	
@@ -97,7 +102,14 @@ public class Arkanoid extends GraphicsProgram
 		if(collObj.getClass() == Brick.class)
 		{
 			remove(collObj);
+			if(r_gen.nextInt()%5 == 0)
+				add(new Bonus("", BonusType.BALL), ball.getX(), ball.getY());
 			ball.hit(false);
 		}
+	}
+	
+	public void checkBonus()
+	{
+		GObject collObj = getElementAt(board.getX(), board.getY());
 	}
 }
