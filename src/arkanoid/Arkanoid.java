@@ -33,7 +33,7 @@ public class Arkanoid extends GraphicsProgram
 		setup();
 		addMouseListeners();
 		addKeyListeners();
-		while(end)
+		while(!end)
 		{
 			logic();
 		}
@@ -87,7 +87,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void keyPressed(KeyEvent e)
 	{
-		if(menu == null && !pause)
+		if(menu == null || !pause)
 		{
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT && board.getX()+board.getWidth() < WINDOW_WIDTH)
 				board.moveRight();
@@ -98,7 +98,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void logic()
 	{
-		if(menu == null && !pause)
+		if(menu == null || !pause)
 		{
 			ball.moveBall();
 			checkCollsion();
