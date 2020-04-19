@@ -6,7 +6,7 @@ import acm.graphics.*;
 
 public class Board extends GImage{
 	
-	public static final double GROW_K = 2;
+	public static final double GROW_K = 1.3;
 	
 	private int width;
 	private int height;

@@ -36,7 +36,17 @@ public class Bonus extends GImage
 	public static Bonus getRandomBonus()
 	{
 		Random rand = new Random();
-		return new Bonus("",intToEnumConverter(rand.nextInt(3)));
+		switch(rand.nextInt()%3)
+		{
+		case 0:
+			return new Bonus("Ball-Bonus.png", BonusType.BALL);
+		case 1:
+			return new Bonus("Extender-Bonus.png", BonusType.BOARD_EXTENDER);
+		case 2:
+			return new Bonus("Constricter-Bonus.png", BonusType.BOARD_CONSTRICTER);
+		}
+		return null;
+		
 	}
 	
 	public BonusType getBonusType() { return type; }
