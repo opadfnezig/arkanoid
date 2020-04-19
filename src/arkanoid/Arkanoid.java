@@ -90,11 +90,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void keyPressed(KeyEvent e)
 	{
-<<<<<<< HEAD
 		if(menu == null && !pause && board != null)
-=======
-		if(menu == null || !pause)
->>>>>>> cc51fe3bf5ccb626ba30959d7cd539162df6eb6a
 		{
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT && board.getX()+board.getWidth() < WINDOW_WIDTH)
 				board.moveRight();
@@ -105,7 +101,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void logic()
 	{
-		if(menu == null || !pause)
+		if(menu == null && !pause)
 		{
 			if(ball != null)
 			{
@@ -123,10 +119,12 @@ public class Arkanoid extends GraphicsProgram
 			ball.hit(true);
 		if(ball.getX()+ball.getWidth() >= WINDOW_WIDTH)
 			ball.hit(true);
-		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20 && ball.getX()-ball.getWidth() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
+		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20-board.getHeight() && ball.getX()-ball.getWidth() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
 			ball.hit(false);
-		if(ball.getY() > WINDOW_HEIGHT-20-ball.getHeight())
+		if(ball.getY() > WINDOW_HEIGHT-20)
 			remove(ball);
+		if(ball.getY() <= 0)
+			ball.hit(false);
 		GObject collObj = getElementAt(ball.getX()+1, ball.getY()+1);
 		if(collObj.getClass() == Brick.class)
 		{
