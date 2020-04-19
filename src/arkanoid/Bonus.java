@@ -34,11 +34,11 @@ public class Bonus extends GImage
 		switch(rand.nextInt()%3)
 		{
 		case 0:
-			return new Bonus("Ball-Bonus.png", BonusType.BALL);
+			return new Bonus("ball-Bonus.png", BonusType.BALL);
 		case 1:
-			return new Bonus("Extender-Bonus.png", BonusType.BOARD_EXTENDER);
+			return new Bonus("extender-Bonus.png", BonusType.BOARD_EXTENDER);
 		case 2:
-			return new Bonus("Constricter-Bonus.png", BonusType.BOARD_CONSTRICTER);
+			return new Bonus("constricter-Bonus.png", BonusType.BOARD_CONSTRICTER);
 		}
 		return null;
 		
