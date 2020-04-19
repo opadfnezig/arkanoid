@@ -134,7 +134,7 @@ public class Arkanoid extends GraphicsProgram
 			ball.hit(true);
 		if(ball.getX()+ball.getWidth() >= WINDOW_WIDTH)
 			ball.hit(true);
-		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20-board.getHeight() && ball.getX() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
+		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20-board.getHeight() && ball.getX() > board.getX() && ball.getX() < board.getX()+ board.getWidth() && ball.getAngle() < Math.PI)
 			ball.hit(false);
 		if(ball.getY() > WINDOW_HEIGHT-20-board.getHeight())
 			remove(ball);
@@ -143,11 +143,14 @@ public class Arkanoid extends GraphicsProgram
 		GObject collObj = this.getElementAt(ball.getX(), ball.getY());
 		if(collObj != null)
 		{
-		if(collObj.getClass() == Brick.class)
-		{
-			remove(collObj);
-			ball.hit(false);
-		}
+			if(collObj.getClass() == Brick.class)
+			{
+				remove(collObj);
+				if(collObj.getY()+collObj.getHeight() < ball.getY())
+					ball.hit(true);
+				else
+					ball.hit(false);
+			}
 		}
 	}
 	
