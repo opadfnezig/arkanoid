@@ -197,11 +197,13 @@ public class Arkanoid extends GraphicsProgram
 	                 add(bonus, ball.getX(), ball.getY());
 	            }
 			}
+			else if(colObj.getClass() == UnbreakableBrick.class)
+				ball.hit(false);
 		}
 		colObj = this.getElementAt(ball.getX(), ball.getY()+ball.getHeight()/2);
 		if(colObj != null)
 		{
-			if(colObj.getClass() == Brick.class)
+			if(colObj.getClass() == Brick.class) 
 			{
 				bricks--;
 				remove(colObj);
@@ -212,6 +214,8 @@ public class Arkanoid extends GraphicsProgram
 	                 add(bonus, ball.getX(), ball.getY());
 	            }
 			}
+			else if(colObj.getClass() == UnbreakableBrick.class)
+				ball.hit(true);
 		}
 		colObj = this.getElementAt(ball.getX()+ball.getWidth(), ball.getY()+ball.getHeight()/2);
 		if(colObj != null)
@@ -227,6 +231,8 @@ public class Arkanoid extends GraphicsProgram
 	                 add(bonus, ball.getX(), ball.getY());
 	            }
 			}
+			else if(colObj.getClass() == UnbreakableBrick.class)
+				ball.hit(true);
 		}
 		colObj = this.getElementAt(ball.getX()+ball.getWidth()/2, ball.getY()+ball.getHeight());
 		if(colObj != null)
@@ -242,6 +248,8 @@ public class Arkanoid extends GraphicsProgram
 	                 add(bonus, ball.getX(), ball.getY());
 	            }
 			}
+			else if(colObj.getClass() == UnbreakableBrick.class)
+				ball.hit(false);
 		}
 		if(ball.getY() > WINDOW_HEIGHT)
 		{
