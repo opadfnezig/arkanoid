@@ -90,7 +90,11 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void keyPressed(KeyEvent e)
 	{
+<<<<<<< HEAD
 		if(menu == null && !pause && board != null)
+=======
+		if(menu == null || !pause)
+>>>>>>> cc51fe3bf5ccb626ba30959d7cd539162df6eb6a
 		{
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT && board.getX()+board.getWidth() < WINDOW_WIDTH)
 				board.moveRight();
@@ -101,7 +105,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void logic()
 	{
-		if(menu == null && !pause)
+		if(menu == null || !pause)
 		{
 			if(ball != null)
 			{
