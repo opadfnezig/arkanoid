@@ -136,7 +136,7 @@ public class Arkanoid extends GraphicsProgram
 		add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
 		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());
 		
-		gameBar = new GameBar(WINDOW_WIDTH);
+		gameBar = new GameBar(WINDOW_WIDTH, level);
 		gameBar.setBallCount(ballCount);
 		add(gameBar,0,WINDOW_HEIGHT-20);
 		
