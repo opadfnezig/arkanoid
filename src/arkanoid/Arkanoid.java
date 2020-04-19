@@ -124,7 +124,7 @@ public class Arkanoid extends GraphicsProgram
 				checkCollsion();
 			}
 			//checkBonus();
-			//checkWinOrLose();
+			checkWinOrLose();
 		}
 	}
 	
@@ -144,7 +144,7 @@ public class Arkanoid extends GraphicsProgram
 			if(collObj.getClass() == Brick.class)
 			{
 				remove(collObj);
-				if(collObj.getY()+collObj.getHeight() < ball.getY() && ball.getY() < collObj.getY())
+				if(collObj.getY()+collObj.getHeight() <= ball.getY() && ball.getY()+ball.getHeight() <= collObj.getY())
 					ball.hit(true);
 				else
 					ball.hit(false);
@@ -156,7 +156,10 @@ public class Arkanoid extends GraphicsProgram
 			if(collObj.getClass() == Brick.class)
 			{
 				remove(collObj);
-				ball.hit(false);
+				if(collObj.getY()+collObj.getHeight() >= ball.getY() && ball.getY()+ball.getHeight() >= collObj.getY())
+					ball.hit(true);
+				else
+					ball.hit(false);
 			}
 		}
 		if(ball.getY() > WINDOW_HEIGHT-20-board.getHeight())
@@ -193,7 +196,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void checkWinOrLose()
 	{
-		if(bricks == 0)
+		/*if(bricks == 0)
 		{
 			this.removeAll();
 			menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
@@ -204,14 +207,14 @@ public class Arkanoid extends GraphicsProgram
 			this.removeAll();
 			menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
 			add(menu, 0 ,0);
-		}
+		}*/
 		if(ball == null && ballCount > 0)
 		{
 			remove(board);
 			board = new Board("images/board.png", 100, 10);
 			ball = new Ball("images/ball.png", 10, 2, -Math.PI/4);
 			add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
-			add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()+ball.getHeight());
+			add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());;
 			ballCount--;
 		}
 		
