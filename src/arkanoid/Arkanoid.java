@@ -39,7 +39,7 @@ public class Arkanoid extends GraphicsProgram
 		while(!end)
 		{
 			logic();
-			this.pause(10);
+			this.pause(5);
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class Arkanoid extends GraphicsProgram
 		}
 		
 		board = new Board("images/board.png", 100, 10);
-		ball = new Ball("images/ball.png", 10, 2, -Math.PI/4);
+		ball = new Ball("images/ball.png", 10, 1, 2*Math.PI-Math.PI/4);
 		add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
 		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());
 		
@@ -142,41 +142,63 @@ public class Arkanoid extends GraphicsProgram
 			ball.hit(false);
 		if(ball.getY() <= 0)
 			ball.hit(false);
-		GObject collObj = this.getElementAt(ball.getX(), ball.getY());
-		if(collObj != null)
+		GObject colObj = this.getElementAt(ball.getX()+ball.getWidth()/2, ball.getY());
+		if(colObj != null)
 		{
-			if(collObj.getClass() == Brick.class)
+			if(colObj.getClass() == Brick.class)
 			{
-				remove(collObj);
-				if(collObj.getY()+collObj.getHeight() > ball.getY()+2 && ball.getY()+ball.getHeight() > collObj.getY())
-					ball.hit(true);
-				else
-					ball.hit(false);
+				remove(colObj);
+				ball.hit(false);
 				if(bonus == null)
-				{
+	            {
 					bonus = Bonus.getRandomBonus();
-					add(bonus, ball.getX(), ball.getY());
-				}
+	                 add(bonus, ball.getX(), ball.getY());
+	            }
 			}
 		}
-		collObj = this.getElementAt(ball.getX()+ball.getWidth(), ball.getY()+ball.getHeight());
-		if(collObj != null)
+		colObj = this.getElementAt(ball.getX(), ball.getY()+ball.getHeight()/2);
+		if(colObj != null)
 		{
-			if(collObj.getClass() == Brick.class)
+			if(colObj.getClass() == Brick.class)
 			{
-				remove(collObj);
-				if(collObj.getY()+collObj.getHeight() > ball.getY() && ball.getY()+ball.getHeight() > collObj.getY())
-					ball.hit(true);
-				else
-					ball.hit(false);
+				remove(colObj);
+				ball.hit(true);
 				if(bonus == null)
-				{
+	            {
 					bonus = Bonus.getRandomBonus();
-					add(bonus, ball.getX(), ball.getY());
-				}
+	                 add(bonus, ball.getX(), ball.getY());
+	            }
 			}
 		}
-		if(ball.getY() > WINDOW_HEIGHT-20-board.getHeight())
+		colObj = this.getElementAt(ball.getX()+ball.getWidth(), ball.getY()+ball.getHeight()/2);
+		if(colObj != null)
+		{
+			if(colObj.getClass() == Brick.class)
+			{
+				remove(colObj);
+				ball.hit(true);
+				if(bonus == null)
+	            {
+					bonus = Bonus.getRandomBonus();
+	                 add(bonus, ball.getX(), ball.getY());
+	            }
+			}
+		}
+		colObj = this.getElementAt(ball.getX()+ball.getWidth()/2, ball.getY()+ball.getHeight());
+		if(colObj != null)
+		{
+			if(colObj.getClass() == Brick.class)
+			{
+				remove(colObj);
+				ball.hit(false);
+				if(bonus == null)
+	            {
+					bonus = Bonus.getRandomBonus();
+	                 add(bonus, ball.getX(), ball.getY());
+	            }
+			}
+		}
+		if(ball.getY() > WINDOW_HEIGHT)
 		{
 			remove(ball);
 			ball = null;
@@ -227,7 +249,7 @@ public class Arkanoid extends GraphicsProgram
 		{
 			remove(board);
 			board = new Board("images/board.png", 100, 10);
-			ball = new Ball("images/ball.png", 10, 2, -Math.PI/4);
+			ball = new Ball("images/ball.png", 10, 1, 2*Math.PI-Math.PI/4);
 			add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
 			add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());;
 			ballCount--;
