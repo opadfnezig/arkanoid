@@ -53,7 +53,9 @@ public class Arkanoid extends GraphicsProgram
 		end = false;
 		pause = false;
 		
-		level = 1;
+		level = 2;
+		bricks = 0;
+		ballCount = 3;
 		
 		menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
 		add(menu, 0 ,0);
@@ -83,12 +85,22 @@ public class Arkanoid extends GraphicsProgram
 	public void setupLevel(int lv)
 	{
 		bricks = 0;
+		GImage back = new GImage("backgroundlvl.png");
+		back.scale(WINDOW_WIDTH/back.getWidth(), WINDOW_HEIGHT/back.getHeight());
+		this.add(back, 0, 0);
 		switch(lv)
 		{
 		case 1:
-			GImage back = new GImage("backgroundlvl.png");
-			back.scale(WINDOW_WIDTH/back.getWidth(), WINDOW_HEIGHT/back.getHeight());
-			this.add(back, 0, 0);
+			for(int i = 0;i<WINDOW_HEIGHT/BRICK_HEIGHT/2;i+=2)
+			{
+				for(int j = 0;j<WINDOW_WIDTH/BRICK_WIDTH;j++)
+				{
+					this.add(new Brick("images/brick.png",BRICK_WIDTH,BRICK_HEIGHT),j*BRICK_WIDTH,i*BRICK_HEIGHT);
+					bricks++;
+				}
+			}
+			break;
+		case 2:
 			for(int i = 0;i<WINDOW_HEIGHT/BRICK_HEIGHT/2;i++)
 			{
 				for(int j = 0;j<WINDOW_WIDTH/BRICK_WIDTH;j++)
@@ -97,7 +109,25 @@ public class Arkanoid extends GraphicsProgram
 					bricks++;
 				}
 			}
-		break;
+			break;
+		case 3:
+			for(int i = 0;i<WINDOW_HEIGHT/BRICK_HEIGHT/2;i++)
+			{
+				for(int j = 0;j<WINDOW_WIDTH/BRICK_WIDTH;j++)
+				{
+					if(i%2 == 0)
+						this.add(new Brick("images/brick.png",BRICK_WIDTH,BRICK_HEIGHT),j*BRICK_WIDTH,i*BRICK_HEIGHT);
+					else
+					{
+						if(j%2 == 0)
+							this.add(new UnbreakableBrick("images/brick-Unbreakable.png",BRICK_WIDTH,BRICK_HEIGHT),j*BRICK_WIDTH,i*BRICK_HEIGHT);
+						else
+							this.add(new Brick("images/brick.png",BRICK_WIDTH,BRICK_HEIGHT),j*BRICK_WIDTH,i*BRICK_HEIGHT);
+					}
+					bricks++;
+				}
+			}
+			break;
 		}
 		
 		board = new Board("images/board.png", 100, 10);
@@ -105,7 +135,6 @@ public class Arkanoid extends GraphicsProgram
 		add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
 		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());
 		
-		ballCount = 3;
 		gameBar = new GameBar(WINDOW_WIDTH);
 		gameBar.setBallCount(ballCount);
 		add(gameBar,0,WINDOW_HEIGHT-20);
@@ -137,6 +166,8 @@ public class Arkanoid extends GraphicsProgram
 				bonus.move();
 				checkBonus();
 			}
+			if(bricks == 0)
+				pause(1000);
 			checkWinOrLose();
 		}
 	}
@@ -243,29 +274,31 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void checkWinOrLose()
 	{
+		if(ball == null)
+		{
+			if(ballCount > 0)
+			{
+				remove(board);
+				board = new Board("images/board.png", 100, 10);
+				ball = new Ball("images/ball.png", 10, 1, 2*Math.PI-Math.PI/4);
+				add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
+				add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());;
+				ballCount--;
+				gameBar.setBallCount(ballCount);
+			}
+			else
+			{
+				this.removeAll();
+				menu = new Menu(new GImage("images/backgroundLose.jpg"), new GImage("images/logoLose.png"), new GImage("images/restart.png"));
+				add(menu, 0 ,0);
+			}	
+		}
 		if(bricks == 0)
 		{
 			this.removeAll();
 			menu = new Menu(new GImage("images/backgroundNext.jpg"), new GImage("images/logoNext.png"), new GImage("images/next.png"));
 			add(menu, 0 ,0);
+			level++;
 		}
-		if(ball == null && ballCount < 1)
-		{
-			this.removeAll();
-			menu = new Menu(new GImage("images/backgroundLose.jpg"), new GImage("images/logoLose.png"), new GImage("images/restart.png"));
-			add(menu, 0 ,0);
-		}
-		if(ball == null && ballCount > 0)
-		{
-			remove(board);
-			board = new Board("images/board.png", 100, 10);
-			ball = new Ball("images/ball.png", 10, 1, 2*Math.PI-Math.PI/4);
-			add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
-			add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());;
-			ballCount--;
-			gameBar.setBallCount(ballCount);
-		}
-		
-			
 	}
 }
