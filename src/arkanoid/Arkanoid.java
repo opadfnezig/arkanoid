@@ -22,6 +22,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	private int bricks;
 	private int ballCount;
+	private int level;
 	
 	private Ball ball;
 	private Board board;
@@ -52,6 +53,8 @@ public class Arkanoid extends GraphicsProgram
 		end = false;
 		pause = false;
 		
+		level = 1;
+		
 		menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
 		add(menu, 0 ,0);
 		ball = null;
@@ -67,7 +70,7 @@ public class Arkanoid extends GraphicsProgram
 			{
 				remove(menu);
 				menu = null;
-				setupLevel(1);
+				setupLevel(level);
 			}
 		}
 		else
@@ -240,18 +243,18 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void checkWinOrLose()
 	{
-		/*if(bricks == 0)
+		if(bricks == 0)
 		{
 			this.removeAll();
-			menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
+			menu = new Menu(new GImage("images/backgroundNext.jpg"), new GImage("images/logoNext.png"), new GImage("images/next.png"));
 			add(menu, 0 ,0);
 		}
 		if(ball == null && ballCount < 1)
 		{
 			this.removeAll();
-			menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
+			menu = new Menu(new GImage("images/backgroundLose.jpg"), new GImage("images/logoLose.png"), new GImage("images/restart.png"));
 			add(menu, 0 ,0);
-		}*/
+		}
 		if(ball == null && ballCount > 0)
 		{
 			remove(board);

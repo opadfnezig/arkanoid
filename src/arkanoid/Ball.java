@@ -19,6 +19,7 @@ public class Ball extends GImage{
 	public void moveBall()
 	{
 		this.move(speed*Math.cos(angle), speed*Math.sin(angle));
+		speed+=0.0001;
 	}
 	
 	public double getAngle()
