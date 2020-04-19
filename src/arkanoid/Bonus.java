@@ -36,9 +36,9 @@ public class Bonus extends GImage
 		case 0:
 			return new Bonus("ball-Bonus.png", BonusType.BALL);
 		case 1:
-			return new Bonus("extender-Bonus.png", BonusType.BOARD_EXTENDER);
+			return new Bonus("bonus-extender-Bonus.png", BonusType.BOARD_EXTENDER);
 		case 2:
-			return new Bonus("constricter-Bonus.png", BonusType.BOARD_CONSTRICTER);
+			return new Bonus("bonus-constricter-Bonus.png", BonusType.BOARD_CONSTRICTER);
 		}
 		return null;
 		
