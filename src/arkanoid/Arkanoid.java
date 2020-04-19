@@ -130,7 +130,7 @@ public class Arkanoid extends GraphicsProgram
 			}
 			break;
 		}
-		
+
 		board = new Board("images/board.png", 100, 10);
 		ball = new Ball("images/ball.png", 10, 1, 2*Math.PI-Math.PI/4);
 		add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
@@ -188,6 +188,7 @@ public class Arkanoid extends GraphicsProgram
 		{
 			if(colObj.getClass() == Brick.class)
 			{
+				bricks--;
 				remove(colObj);
 				ball.hit(false);
 				if(bonus == null && rand.nextInt(3) == 0)
@@ -202,6 +203,7 @@ public class Arkanoid extends GraphicsProgram
 		{
 			if(colObj.getClass() == Brick.class)
 			{
+				bricks--;
 				remove(colObj);
 				ball.hit(true);
 				if(bonus == null && rand.nextInt(3) == 0)
@@ -216,6 +218,7 @@ public class Arkanoid extends GraphicsProgram
 		{
 			if(colObj.getClass() == Brick.class)
 			{
+				bricks--;
 				remove(colObj);
 				ball.hit(true);
 				if(bonus == null && rand.nextInt(3) == 0)
@@ -230,6 +233,7 @@ public class Arkanoid extends GraphicsProgram
 		{
 			if(colObj.getClass() == Brick.class)
 			{
+				bricks--;
 				remove(colObj);
 				ball.hit(false);
 				if(bonus == null && rand.nextInt(3) == 0)
@@ -297,7 +301,7 @@ public class Arkanoid extends GraphicsProgram
 		if(bricks == 0)
 		{
 			this.removeAll();
-			menu = new Menu(new GImage("images/backgroundNext.jpg"), new GImage("images/logoNext.png"), new GImage("images/next.png"));
+			menu = new Menu(new GImage("images/backgroundNext.png"), new GImage("images/logoNext.png"), new GImage("images/next.png"));
 			add(menu, 0 ,0);
 			level++;
 		}
