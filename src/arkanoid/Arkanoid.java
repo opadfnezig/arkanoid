@@ -31,6 +31,8 @@ public class Arkanoid extends GraphicsProgram
 	
 	private RandomGenerator r_gen;
 	
+	private GameBar gameBar;
+	
 	public void run()
 	{
 		setup();
@@ -101,6 +103,10 @@ public class Arkanoid extends GraphicsProgram
 		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());
 		
 		ballCount = 3;
+		gameBar = new GameBar(WINDOW_WIDTH);
+		gameBar.setBallCount(ballCount);
+		add(gameBar,0,WINDOW_HEIGHT-20);
+		
 	}
 	
 	public void keyPressed(KeyEvent e)
@@ -213,6 +219,7 @@ public class Arkanoid extends GraphicsProgram
 			{
 			case BALL:
 				ballCount++;
+				gameBar.setBallCount(ballCount);
 				break;
 			case BOARD_EXTENDER:
 				board.grow();
@@ -253,6 +260,7 @@ public class Arkanoid extends GraphicsProgram
 			add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
 			add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());;
 			ballCount--;
+			gameBar.setBallCount(ballCount);
 		}
 		
 			
