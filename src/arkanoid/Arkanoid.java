@@ -125,7 +125,7 @@ public class Arkanoid extends GraphicsProgram
 			remove(ball);
 		if(ball.getY() <= 0)
 			ball.hit(false);
-		GObject collObj = getElementAt(ball.getX()+1, ball.getY()+1);
+		GObject collObj = getElementAt(ball.getX()+10, ball.getY()+10);
 		if(collObj.getClass() == Brick.class)
 		{
 			remove(collObj);
