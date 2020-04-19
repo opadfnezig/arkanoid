@@ -124,8 +124,10 @@ public class Arkanoid extends GraphicsProgram
 				checkCollsion();
 			}
 			if(bonus != null)
+			{
 				bonus.move();
-			checkBonus();
+				checkBonus();
+			}
 			checkWinOrLose();
 		}
 	}
@@ -146,12 +148,15 @@ public class Arkanoid extends GraphicsProgram
 			if(collObj.getClass() == Brick.class)
 			{
 				remove(collObj);
-				if(collObj.getY()+collObj.getHeight() < ball.getY() && ball.getY()+ball.getHeight() < collObj.getY())
+				if(collObj.getY()+collObj.getHeight() > ball.getY()+2 && ball.getY()+ball.getHeight() > collObj.getY())
 					ball.hit(true);
 				else
 					ball.hit(false);
-				if(r_gen.nextInt()%5 == 0 && bonus == null)
+				if(bonus == null)
+				{
 					bonus = Bonus.getRandomBonus();
+					add(bonus, ball.getX(), ball.getY());
+				}
 			}
 		}
 		collObj = this.getElementAt(ball.getX()+ball.getWidth(), ball.getY()+ball.getHeight());
@@ -164,8 +169,11 @@ public class Arkanoid extends GraphicsProgram
 					ball.hit(true);
 				else
 					ball.hit(false);
-				if(r_gen.nextInt()%5 == 0 && bonus == null)
+				if(bonus == null)
+				{
 					bonus = Bonus.getRandomBonus();
+					add(bonus, ball.getX(), ball.getY());
+				}
 			}
 		}
 		if(ball.getY() > WINDOW_HEIGHT-20-board.getHeight())
@@ -177,7 +185,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void checkBonus()
 	{
-		if(bonus.getX()-bonus.getWidth() > board.getX() && bonus.getX() < board.getX()+board.getWidth())
+		if(bonus.getX()+bonus.getWidth() > board.getX() && bonus.getX() < board.getX()+board.getWidth() && bonus.getY()+bonus.getHeight() > board.getY())
 		{
 			switch(bonus.getBonusType())
 			{
@@ -191,6 +199,11 @@ public class Arkanoid extends GraphicsProgram
 				board.decriase();
 				break;
 			}
+			remove(bonus);
+			bonus = null;
+		}
+		else if(bonus.getY() > WINDOW_HEIGHT-20)
+		{
 			remove(bonus);
 			bonus = null;
 		}

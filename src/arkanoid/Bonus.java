@@ -10,7 +10,7 @@ public class Bonus extends GImage
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
 	
-	private static final int MOVE_SPEED = 5;
+	private static final int MOVE_SPEED = 2;
 	
 	public static enum BonusType{
 		BALL,
@@ -31,14 +31,14 @@ public class Bonus extends GImage
 	public static Bonus getRandomBonus()
 	{
 		Random rand = new Random();
-		switch(rand.nextInt()%3)
+		switch(rand.nextInt(3))
 		{
 		case 0:
 			return new Bonus("ball-Bonus.png", BonusType.BALL);
 		case 1:
-			return new Bonus("bonus-extender-Bonus.png", BonusType.BOARD_EXTENDER);
+			return new Bonus("board-extender-Bonus.png", BonusType.BOARD_EXTENDER);
 		case 2:
-			return new Bonus("bonus-constricter-Bonus.png", BonusType.BOARD_CONSTRICTER);
+			return new Bonus("board-constricter-Bonus.png", BonusType.BOARD_CONSTRICTER);
 		}
 		return null;
 		
