@@ -123,7 +123,9 @@ public class Arkanoid extends GraphicsProgram
 				ball.moveBall();
 				checkCollsion();
 			}
-			//checkBonus();
+			if(bonus != null)
+				bonus.move();
+			checkBonus();
 			checkWinOrLose();
 		}
 	}
@@ -148,6 +150,8 @@ public class Arkanoid extends GraphicsProgram
 					ball.hit(true);
 				else
 					ball.hit(false);
+				if(r_gen.nextInt()%5 == 0 && bonus == null)
+					bonus = Bonus.getRandomBonus();
 			}
 		}
 		collObj = this.getElementAt(ball.getX()+ball.getWidth(), ball.getY()+ball.getHeight());
