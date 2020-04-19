@@ -2,7 +2,7 @@ package arkanoid;
 
 
 import java.awt.event.*;
-
+import java.util.Random;
 
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
@@ -30,7 +30,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	private Menu menu;
 	
-	private RandomGenerator r_gen;
+	private Random rand;
 	
 	private GameBar gameBar;
 	
@@ -49,15 +49,16 @@ public class Arkanoid extends GraphicsProgram
 	public void setup()
 	{
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		rand = new Random();
 		
 		end = false;
 		pause = false;
 		
-		level = 2;
+		level = 1;
 		bricks = 0;
 		ballCount = 3;
 		
-		menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
+		menu = new Menu(new GImage("images/background.png"), new GImage("images/logo.png"), new GImage("images/start.png"));
 		add(menu, 0 ,0);
 		ball = null;
 		board = null;
@@ -189,7 +190,7 @@ public class Arkanoid extends GraphicsProgram
 			{
 				remove(colObj);
 				ball.hit(false);
-				if(bonus == null)
+				if(bonus == null && rand.nextInt(3) == 0)
 	            {
 					bonus = Bonus.getRandomBonus();
 	                 add(bonus, ball.getX(), ball.getY());
@@ -203,7 +204,7 @@ public class Arkanoid extends GraphicsProgram
 			{
 				remove(colObj);
 				ball.hit(true);
-				if(bonus == null)
+				if(bonus == null && rand.nextInt(3) == 0)
 	            {
 					bonus = Bonus.getRandomBonus();
 	                 add(bonus, ball.getX(), ball.getY());
@@ -217,7 +218,7 @@ public class Arkanoid extends GraphicsProgram
 			{
 				remove(colObj);
 				ball.hit(true);
-				if(bonus == null)
+				if(bonus == null && rand.nextInt(3) == 0)
 	            {
 					bonus = Bonus.getRandomBonus();
 	                 add(bonus, ball.getX(), ball.getY());
@@ -231,7 +232,7 @@ public class Arkanoid extends GraphicsProgram
 			{
 				remove(colObj);
 				ball.hit(false);
-				if(bonus == null)
+				if(bonus == null && rand.nextInt(3) == 0)
 	            {
 					bonus = Bonus.getRandomBonus();
 	                 add(bonus, ball.getX(), ball.getY());
