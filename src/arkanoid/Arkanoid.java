@@ -88,7 +88,7 @@ public class Arkanoid extends GraphicsProgram
 			{
 				for(int j = 0;j<WINDOW_WIDTH/BRICK_WIDTH;j++)
 				{
-					this.add(new Brick("images/cow.png",BRICK_WIDTH,BRICK_HEIGHT),j*BRICK_WIDTH,i*BRICK_HEIGHT);
+					this.add(new Brick("images/brick.png",BRICK_WIDTH,BRICK_HEIGHT),j*BRICK_WIDTH,i*BRICK_HEIGHT);
 					bricks++;
 				}
 			}
@@ -144,7 +144,7 @@ public class Arkanoid extends GraphicsProgram
 			if(collObj.getClass() == Brick.class)
 			{
 				remove(collObj);
-				if(collObj.getY()+collObj.getHeight() <= ball.getY() && ball.getY()+ball.getHeight() <= collObj.getY())
+				if(collObj.getY()+collObj.getHeight() < ball.getY() && ball.getY()+ball.getHeight() < collObj.getY())
 					ball.hit(true);
 				else
 					ball.hit(false);
@@ -156,10 +156,12 @@ public class Arkanoid extends GraphicsProgram
 			if(collObj.getClass() == Brick.class)
 			{
 				remove(collObj);
-				if(collObj.getY()+collObj.getHeight() >= ball.getY() && ball.getY()+ball.getHeight() >= collObj.getY())
+				if(collObj.getY()+collObj.getHeight() > ball.getY() && ball.getY()+ball.getHeight() > collObj.getY())
 					ball.hit(true);
 				else
 					ball.hit(false);
+				if(r_gen.nextInt()%5 == 0 && bonus == null)
+					bonus = Bonus.getRandomBonus();
 			}
 		}
 		if(ball.getY() > WINDOW_HEIGHT-20-board.getHeight())
@@ -171,26 +173,22 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void checkBonus()
 	{
-		for(int i = 0; i < board.getWidth(); i+=Bonus.WIDTH)
+		if(bonus.getX()-bonus.getWidth() > board.getX() && bonus.getX() < board.getX()+board.getWidth())
 		{
-			GObject collObj = this.getElementAt(board.getX()+Bonus.WIDTH*i, board.getY());
-			if(collObj.getClass() == Bonus.class)
+			switch(bonus.getBonusType())
 			{
-				Bonus bonus = (Bonus)collObj;
-				switch(bonus.getBonusType())
-				{
-				case BALL:
-					ballCount++;
-					break;
-				case BOARD_EXTENDER:
-					board.grow();
-					break;
-				case BOARD_CONSTRICTER:
-					board.decriase();
-					break;
-				}
-				remove(bonus);
+			case BALL:
+				ballCount++;
+				break;
+			case BOARD_EXTENDER:
+				board.grow();
+				break;
+			case BOARD_CONSTRICTER:
+				board.decriase();
+				break;
 			}
+			remove(bonus);
+			bonus = null;
 		}
 	}
 	
