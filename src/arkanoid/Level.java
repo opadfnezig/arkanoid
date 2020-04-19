@@ -18,9 +18,9 @@ public class Level extends GCompound
 			GImage back = new GImage("backgroundlvl.png");
 			back.scale(wWidth/back.getWidth(), wHeight/back.getHeight());
 			this.add(back, 0, 0);
-			for(int i = 0;i<wHeight/BRICK_HEIGHT/2;++i)
+			for(int i = 0;i<wHeight/BRICK_HEIGHT/2;i++)
 			{
-				for(int j = 0;j<wWidth/BRICK_WIDTH;++j)
+				for(int j = 0;j<wWidth/BRICK_WIDTH;j++)
 				{
 					this.add(new Brick("images/cow.png",BRICK_WIDTH,BRICK_HEIGHT),j*BRICK_WIDTH,i*BRICK_HEIGHT);
 					bricks++;

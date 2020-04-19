@@ -22,6 +22,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	private Ball ball;
 	private Board board;
+	private Bonus bonus;
 	
 	private Menu menu;
 	private Level lvl;
@@ -33,9 +34,10 @@ public class Arkanoid extends GraphicsProgram
 		setup();
 		addMouseListeners();
 		addKeyListeners();
-		while(end)
+		while(!end)
 		{
 			logic();
+			this.pause(10);
 		}
 	}
 	
@@ -51,13 +53,14 @@ public class Arkanoid extends GraphicsProgram
 		lvl = null;
 		ball = null;
 		board = null;
+		bonus = null;
 	}
 	
 	public void mouseClicked(MouseEvent e) 
 	{
 		if(menu != null)
 		{
-			if(menu.pressButton(new GPoint(e.getPoint())))
+			if(menu.pressButton(new GPoint(e.getX(), e.getY())))
 			{
 				remove(menu);
 				menu = null;
@@ -78,7 +81,7 @@ public class Arkanoid extends GraphicsProgram
 		add(lvl);
 		
 		board = new Board("images/board.png", 100, 10);
-		ball = new Ball("images/ball.png", 10, 2, Math.PI/4);
+		ball = new Ball("images/ball.png", 10, 2, -Math.PI/4);
 		add(board, WINDOW_WIDTH/2-board.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight());
 		add(ball, WINDOW_WIDTH/2-ball.getWidth()/2, WINDOW_HEIGHT-20-board.getHeight()-ball.getHeight());
 		
@@ -87,7 +90,7 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void keyPressed(KeyEvent e)
 	{
-		if(menu == null && !pause)
+		if(menu == null && !pause && board != null)
 		{
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT && board.getX()+board.getWidth() < WINDOW_WIDTH)
 				board.moveRight();
@@ -100,9 +103,12 @@ public class Arkanoid extends GraphicsProgram
 	{
 		if(menu == null && !pause)
 		{
-			ball.moveBall();
-			checkCollsion();
-			checkBonus();
+			if(ball != null)
+			{
+				ball.moveBall();
+				checkCollsion();
+			}
+			//checkBonus();
 			checkWinOrLose();
 		}
 	}
@@ -115,14 +121,17 @@ public class Arkanoid extends GraphicsProgram
 			ball.hit(true);
 		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20 && ball.getX()-ball.getWidth() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
 			ball.hit(false);
-		if(ball.getY() > getHeight()-20)
+		if(ball.getY() > WINDOW_HEIGHT-20-ball.getHeight())
 			remove(ball);
-		GObject collObj = getElementAt(ball.getX(), ball.getY());
+		GObject collObj = getElementAt(ball.getX()+1, ball.getY()+1);
 		if(collObj.getClass() == Brick.class)
 		{
 			remove(collObj);
 			if(r_gen.nextInt()%5 == 0)
-				add(new Bonus("", BonusType.BALL), ball.getX(), ball.getY());
+			{
+				bonus = new Bonus("", BonusType.BALL);
+				add(bonus,  ball.getX(), ball.getY());
+			}
 			ball.hit(false);
 		}
 	}
