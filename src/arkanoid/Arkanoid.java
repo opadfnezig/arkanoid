@@ -14,6 +14,9 @@ public class Arkanoid extends GraphicsProgram
 	public static final int WINDOW_WIDTH = 1000;
 	public static final int WINDOW_HEIGHT = 820;
 	
+	public static final int BRICK_WIDTH = 100;
+	public static final int BRICK_HEIGHT = 40;
+	
 	private boolean end;
 	private boolean pause;
 	
@@ -25,7 +28,6 @@ public class Arkanoid extends GraphicsProgram
 	private Bonus bonus;
 	
 	private Menu menu;
-	private Level lvl;
 	
 	private RandomGenerator r_gen;
 	
@@ -50,7 +52,6 @@ public class Arkanoid extends GraphicsProgram
 		
 		menu = new Menu(new GImage("images/background.jpg"), new GImage("images/logo.png"), new GImage("images/start.png"));
 		add(menu, 0 ,0);
-		lvl = null;
 		ball = null;
 		board = null;
 		bonus = null;
@@ -76,9 +77,23 @@ public class Arkanoid extends GraphicsProgram
 	
 	public void setupLevel(int lv)
 	{
-		lvl= new Level(lv, WINDOW_WIDTH, WINDOW_HEIGHT);
-		bricks = lvl.getBricks();
-		add(lvl);
+		bricks = 0;
+		switch(lv)
+		{
+		case 1:
+			GImage back = new GImage("backgroundlvl.png");
+			back.scale(WINDOW_WIDTH/back.getWidth(), WINDOW_HEIGHT/back.getHeight());
+			this.add(back, 0, 0);
+			for(int i = 0;i<WINDOW_HEIGHT/BRICK_HEIGHT/2;i++)
+			{
+				for(int j = 0;j<WINDOW_WIDTH/BRICK_WIDTH;j++)
+				{
+					this.add(new Brick("images/cow.png",BRICK_WIDTH,BRICK_HEIGHT),j*BRICK_WIDTH,i*BRICK_HEIGHT);
+					bricks++;
+				}
+			}
+		break;
+		}
 		
 		board = new Board("images/board.png", 100, 10);
 		ball = new Ball("images/ball.png", 10, 2, -Math.PI/4);
@@ -119,22 +134,20 @@ public class Arkanoid extends GraphicsProgram
 			ball.hit(true);
 		if(ball.getX()+ball.getWidth() >= WINDOW_WIDTH)
 			ball.hit(true);
-		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20-board.getHeight() && ball.getX()-ball.getWidth() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
+		if(ball.getY() + ball.getHeight() >= WINDOW_HEIGHT-20-board.getHeight() && ball.getX() > board.getX() && ball.getX() < board.getX()+ board.getWidth())
 			ball.hit(false);
-		if(ball.getY() > WINDOW_HEIGHT-20)
+		if(ball.getY() > WINDOW_HEIGHT-20-board.getHeight())
 			remove(ball);
 		if(ball.getY() <= 0)
 			ball.hit(false);
-		GObject collObj = getElementAt(ball.getX()+1, ball.getY()+1);
+		GObject collObj = this.getElementAt(ball.getX(), ball.getY());
+		if(collObj != null)
+		{
 		if(collObj.getClass() == Brick.class)
 		{
 			remove(collObj);
-			if(r_gen.nextInt()%5 == 0)
-			{
-				bonus = new Bonus("", BonusType.BALL);
-				add(bonus,  ball.getX(), ball.getY());
-			}
 			ball.hit(false);
+		}
 		}
 	}
 	
