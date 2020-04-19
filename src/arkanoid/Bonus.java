@@ -36,24 +36,20 @@ public class Bonus extends GImage
 	public static Bonus getRandomBonus()
 	{
 		Random rand = new Random();
-		return new Bonus("",intToEnumConverter(rand.nextInt(3)));
-	}
-	
-	public BonusType getBonusType() { return type; }
-	
-	private static BonusType intToEnumConverter(int i)
-	{
-		switch(i)
+		
+		switch(rand.nextInt(3))
 		{
 			case 0:
-				return BonusType.BALL;
+				return new Bonus(ballPath,BonusType.BALL);
 			case 1:
-				return BonusType.BOARD_EXTENDER;
+				return new Bonus(boardExtenderPath,BonusType.BOARD_EXTENDER);
 			case 2:
-				return BonusType.BOARD_CONSTRICTER;
+				return new Bonus(boardConstricterPath, BonusType.BOARD_CONSTRICTER);
 		}
 		return null;
 	}
+	
+	public BonusType getBonusType() { return type; }
 	
 	public void move() { this.move(moveVector.getX()*moveSpeed,moveVector.getY()*moveSpeed); }
 }
