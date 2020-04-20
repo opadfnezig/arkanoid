@@ -308,10 +308,21 @@ public class Arkanoid extends GraphicsProgram
 		}
 		if(bricks == 0)
 		{
-			this.removeAll();
-			menu = new Menu(new GImage("images/backgroundNext.png"), new GImage("images/logoNext.png"), new GImage("images/next.png"));
-			add(menu, 0 ,0);
-			level++;
+			if(level > 2)
+			{
+				end = true;
+				removeAll();
+				GImage theEnd = new GImage("theEnd.png");
+				theEnd.scale(WINDOW_WIDTH/theEnd.getWidth(), WINDOW_HEIGHT/theEnd.getHeight());
+				add(theEnd, 0, 0);
+			}
+			else
+			{
+				this.removeAll();
+				menu = new Menu(new GImage("images/backgroundNext.png"), new GImage("images/logoNext.png"), new GImage("images/next.png"));
+				add(menu, 0 ,0);
+				level++;
+			}
 		}
 	}
 }
