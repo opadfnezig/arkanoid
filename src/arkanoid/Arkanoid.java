@@ -50,7 +50,9 @@ public class Arkanoid extends GraphicsProgram
 			this.pause(5);
 		}
 	}
-	
+	/**
+	 * метод ініціалізує змінні, проводить налаштування основного класу
+	 */
 	private void setup()
 	{
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -85,7 +87,10 @@ public class Arkanoid extends GraphicsProgram
 			pause = !pause;
 		
 	}
-	
+	/**
+	 * метод свторює рівень, добавляє ігрові об'єкти
+	 * @param lv номер рівня
+	 */
 	private void setupLevel(int lv)
 	{
 		bricks = 0;
@@ -144,7 +149,9 @@ public class Arkanoid extends GraphicsProgram
 		add(gameBar,0,WINDOW_HEIGHT-20);
 		
 	}
-	
+	/**
+	 * метод обробляє нажимання клавіш клавіатури, відповідає за рух дошки
+	 */
 	public void keyPressed(KeyEvent e)
 	{
 		if(menu == null && !pause && board != null)
@@ -155,7 +162,9 @@ public class Arkanoid extends GraphicsProgram
 				board.moveLeft();
 		}
 	}
-	
+	/**
+	 * метод займається розподілом системного часу, реалізує основну логіку гри
+	 */
 	private void logic()
 	{
 		if(menu == null && !pause)
@@ -175,7 +184,9 @@ public class Arkanoid extends GraphicsProgram
 			checkWinOrLose();
 		}
 	}
-	
+	/**
+	 * метод реалізує логіку зіткнення м'яча з об'єктами(поведінку м'яча та об'єктів після їх зіткнення)
+	 */
 	private void checkCollsion()
 	{
 		if(ball.getX() <= 0)
@@ -200,7 +211,10 @@ public class Arkanoid extends GraphicsProgram
 			ball = null;
 		}
 	}
-	
+	/**
+	 * @param colObj об'єкт
+	 * @param vertical 
+	 */
 	private void checkHit(GObject colObj, boolean vertical)
 	{
 		if(colObj != null)
@@ -221,6 +235,9 @@ public class Arkanoid extends GraphicsProgram
 		}
 	}
 	
+	/**
+	 * метод перевіряє зіткнення бонусу з дошкою, та реалізує логіку цього зіткнення
+	 */
 	private void checkBonus()
 	{
 		if(bonus.getX()+bonus.getWidth() > board.getX() && bonus.getX() < board.getX()+board.getWidth() && bonus.getY()+bonus.getHeight() > board.getY())
@@ -235,7 +252,7 @@ public class Arkanoid extends GraphicsProgram
 				board.grow();
 				break;
 			case BOARD_CONSTRICTER:
-				board.decriase();
+				board.decrease();
 				break;
 			}
 			remove(bonus);
@@ -247,7 +264,9 @@ public class Arkanoid extends GraphicsProgram
 			bonus = null;
 		}
 	}
-	
+	/**
+	 * метод перевіряє умови закінчення гри, реалізує логіку виграшу та програшу
+	 */
 	private void checkWinOrLose()
 	{
 		if(ball == null)

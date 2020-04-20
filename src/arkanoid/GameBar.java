@@ -7,7 +7,11 @@ import acm.graphics.GImage;
 import acm.graphics.GLabel;
 import acm.graphics.GLine;
 import acm.graphics.GRect;
-
+/**
+ * клас реалізує ігровий інтерфейс та методи взаємодії з ним
+ * @author opadfnezig
+ *
+ */
 public class GameBar extends GCompound
 {
 	int ballCount = 0;
@@ -17,7 +21,11 @@ public class GameBar extends GCompound
 		this.ballCount = ballCount;
 		label.setLabel("x " + ballCount);
 	}
-	
+	/**
+	 * 
+	 * @param wWidth ширина вікна
+	 * @param lvlNumber номер рівня
+	 */
 	public GameBar(int wWidth, int lvlNumber)
 	{
 		label = new GLabel("x " + ballCount,25, 15);

@@ -1,12 +1,23 @@
 package arkanoid;
 
 import acm.graphics.*;
-
+/**
+ * клас реал≥зуЇ м'€ч 
+ * @author ThorIgor
+ *
+ */
 public class Ball extends GImage{
 	private double speed, angle;
 	private double radius;
 	
 	//startAngle in radians
+	/**
+	 * 
+ 	* @param path
+ 	* @param r
+ 	* @param startSpeed
+ 	* @param startAngle
+ 	*/
 	public Ball(String path, double r, double startSpeed, double startAngle)
 	{
 		super(path);

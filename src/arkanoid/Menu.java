@@ -5,7 +5,11 @@ import java.util.prefs.BackingStoreException;
 import acm.graphics.*;
 
 import java.awt.event.*;
-
+/**
+ * клас реалізує меню
+ * @author ThorIgor
+ *
+ */
 public class Menu extends GCompound {
 	
 	private GImage startButton, logotype, background;

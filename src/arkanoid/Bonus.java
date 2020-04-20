@@ -4,14 +4,18 @@ import java.util.Random;
 
 import acm.graphics.GImage;
 import acm.graphics.GPoint;
-
+/**
+ * метод реалізує ігрові бонуси
+ * @author opadfnezig
+ *
+ */
 public class Bonus extends GImage
 {
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
 	
 	private static final int MOVE_SPEED = 2;
-	
+
 	public static enum BonusType{
 		BALL,
 		BOARD_EXTENDER,
@@ -21,13 +25,20 @@ public class Bonus extends GImage
 	private BonusType type;
 	
 	
-	
+	/**
+	 * 
+	 * @param path шлях до зображення
+	 * @param type тип бонусу
+	 */
 	public Bonus(String path,Bonus.BonusType type) 
 	{
 		super(path); 
 		this.type = type;
 	}
-
+	/**
+	 * 
+	 * @return бонус з рандомним типом
+	 */
 	public static Bonus getRandomBonus()
 	{
 		Random rand = new Random();
@@ -45,20 +56,6 @@ public class Bonus extends GImage
 	}
 	
 	public BonusType getBonusType() { return type; }
-	
-	private static BonusType intToEnumConverter(int i)
-	{
-		switch(i)
-		{
-			case 0:
-				return BonusType.BALL;
-			case 1:
-				return BonusType.BOARD_EXTENDER;
-			case 2:
-				return BonusType.BOARD_CONSTRICTER;
-		}
-		return null;
-	}
-	
+		
 	public void move() { this.move(moveVector.getX()*MOVE_SPEED,moveVector.getY()*MOVE_SPEED); }
 }

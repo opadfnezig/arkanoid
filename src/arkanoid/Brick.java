@@ -5,6 +5,7 @@ import acm.graphics.GPoint;
 import acm.graphics.GRect;
 /**
  * клас реалізує цеглинки
+ * @author opadfnezig
  */
 public class Brick extends GImage
 {
