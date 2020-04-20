@@ -13,7 +13,12 @@ import java.awt.event.*;
 public class Menu extends GCompound {
 	
 	private GImage startButton, logotype, background;
-	
+	/**
+	 * 
+	 * @param back фон
+	 * @param log логотип
+	 * @param strBut кнопка
+	 */
 	public Menu(GImage back, GImage log, GImage strBut)
 	{
 		background = back;
@@ -26,7 +31,11 @@ public class Menu extends GCompound {
 		add(logotype, background.getWidth()/2 - logotype.getWidth()/2, background.getHeight()/2-logotype.getHeight());
 		add(startButton, background.getWidth()/2 - startButton.getWidth()/2, background.getHeight()/2+startButton.getHeight()+10);
 	}
-	
+	/**
+	 * 
+	 * @param point точка нажаття миші
+	 * @return чи попав гравець на кнопку
+	 */
 	public boolean pressButton(GPoint point)
 	{
 		return startButton.contains(point);

@@ -37,12 +37,16 @@ public class Board extends GImage{
 	{
 		this.move(-speed, 0);
 	}
-	
+	/**
+	 * метод збільшує ракетку
+	 */
 	public void grow()
 	{
 		this.scale(GROW_K, 1);
 	}
-	
+	/**
+	 * метод зменшує дошку
+	 */
 	public void decrease()
 	{
 		this.scale((double)1/GROW_K, 1);

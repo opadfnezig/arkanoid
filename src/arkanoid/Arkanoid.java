@@ -212,8 +212,8 @@ public class Arkanoid extends GraphicsProgram
 		}
 	}
 	/**
-	 * @param colObj об'Їкт
-	 * @param vertical 
+	 * @param colObj об'Їкт(цеглина)
+	 * @param vertical в €ку поверхню вдар€Їть€ м'€ч(вертикальну, горизонтальну)
 	 */
 	private void checkHit(GObject colObj, boolean vertical)
 	{

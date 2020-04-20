@@ -13,10 +13,10 @@ public class Ball extends GImage{
 	//startAngle in radians
 	/**
 	 * 
- 	* @param path
- 	* @param r
- 	* @param startSpeed
- 	* @param startAngle
+ 	* @param path шл€х до картинки
+ 	* @param r рад≥ус
+ 	* @param startSpeed швитк≥сть
+ 	* @param startAngle кут
  	*/
 	public Ball(String path, double r, double startSpeed, double startAngle)
 	{
@@ -42,7 +42,10 @@ public class Ball extends GImage{
 	{
 		return speed;
 	}
-	
+	/**
+	 * метод м≥н€Ї кут руху м'€ча залежно в≥д того в €ку повехню в≥н вдар€Їтьс€ та €кий кут в≥н маЇ в цей момент
+	 * @param vertical в €ку поверхню вдар€Їтьс€ м'€ч
+	 */
 	public void hit(boolean vertical)
 	{
 		if(vertical)
