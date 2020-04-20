@@ -6,8 +6,7 @@ import java.util.Random;
 
 import acm.graphics.*;
 import acm.program.GraphicsProgram;
-import acm.util.RandomGenerator;
-import arkanoid.Bonus.BonusType;
+import acm.util.SoundClip;
 
 public class Arkanoid extends GraphicsProgram
 {
@@ -17,10 +16,13 @@ public class Arkanoid extends GraphicsProgram
 	public static final int BRICK_WIDTH = 100;
 	public static final int BRICK_HEIGHT = 40;
 	
+	//закінчення гри
 	private boolean end;
 	private boolean pause;
 	
+	//кількість цеглинок
 	private int bricks;
+	//кількість життів
 	private int ballCount;
 	private int level;
 	
@@ -34,8 +36,11 @@ public class Arkanoid extends GraphicsProgram
 	
 	private GameBar gameBar;
 	
+	SoundClip clip = new SoundClip();
+	
 	public void run()
 	{
+		clip.play();
 		setup();
 		addMouseListeners();
 		addKeyListeners();
@@ -77,9 +82,7 @@ public class Arkanoid extends GraphicsProgram
 			}
 		}
 		else
-		{
 			pause = !pause;
-		}
 		
 	}
 	
