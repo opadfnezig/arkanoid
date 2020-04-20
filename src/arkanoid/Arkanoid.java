@@ -46,7 +46,7 @@ public class Arkanoid extends GraphicsProgram
 		}
 	}
 	
-	public void setup()
+	private void setup()
 	{
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		rand = new Random();
@@ -83,7 +83,7 @@ public class Arkanoid extends GraphicsProgram
 		
 	}
 	
-	public void setupLevel(int lv)
+	private void setupLevel(int lv)
 	{
 		bricks = 0;
 		GImage back = new GImage("backgroundlvl.png");
@@ -153,7 +153,7 @@ public class Arkanoid extends GraphicsProgram
 		}
 	}
 	
-	public void logic()
+	private void logic()
 	{
 		if(menu == null && !pause)
 		{
@@ -173,7 +173,7 @@ public class Arkanoid extends GraphicsProgram
 		}
 	}
 	
-	public void checkCollsion()
+	private void checkCollsion()
 	{
 		if(ball.getX() <= 0)
 			ball.hit(true);
@@ -184,73 +184,13 @@ public class Arkanoid extends GraphicsProgram
 		if(ball.getY() <= 0)
 			ball.hit(false);
 		GObject colObj = this.getElementAt(ball.getX()+ball.getWidth()/2, ball.getY());
-		if(colObj != null)
-		{
-			if(colObj.getClass() == Brick.class)
-			{
-				bricks--;
-				remove(colObj);
-				ball.hit(false);
-				if(bonus == null && rand.nextInt(3) == 0)
-	            {
-					bonus = Bonus.getRandomBonus();
-	                 add(bonus, ball.getX(), ball.getY());
-	            }
-			}
-			else if(colObj.getClass() == UnbreakableBrick.class)
-				ball.hit(false);
-		}
+		checkHit(colObj, false);
 		colObj = this.getElementAt(ball.getX(), ball.getY()+ball.getHeight()/2);
-		if(colObj != null)
-		{
-			if(colObj.getClass() == Brick.class) 
-			{
-				bricks--;
-				remove(colObj);
-				ball.hit(true);
-				if(bonus == null && rand.nextInt(3) == 0)
-	            {
-					bonus = Bonus.getRandomBonus();
-	                 add(bonus, ball.getX(), ball.getY());
-	            }
-			}
-			else if(colObj.getClass() == UnbreakableBrick.class)
-				ball.hit(true);
-		}
+		checkHit(colObj, true);
 		colObj = this.getElementAt(ball.getX()+ball.getWidth(), ball.getY()+ball.getHeight()/2);
-		if(colObj != null)
-		{
-			if(colObj.getClass() == Brick.class)
-			{
-				bricks--;
-				remove(colObj);
-				ball.hit(true);
-				if(bonus == null && rand.nextInt(3) == 0)
-	            {
-					bonus = Bonus.getRandomBonus();
-	                 add(bonus, ball.getX(), ball.getY());
-	            }
-			}
-			else if(colObj.getClass() == UnbreakableBrick.class)
-				ball.hit(true);
-		}
+		checkHit(colObj, true);
 		colObj = this.getElementAt(ball.getX()+ball.getWidth()/2, ball.getY()+ball.getHeight());
-		if(colObj != null)
-		{
-			if(colObj.getClass() == Brick.class)
-			{
-				bricks--;
-				remove(colObj);
-				ball.hit(false);
-				if(bonus == null && rand.nextInt(3) == 0)
-	            {
-					bonus = Bonus.getRandomBonus();
-	                 add(bonus, ball.getX(), ball.getY());
-	            }
-			}
-			else if(colObj.getClass() == UnbreakableBrick.class)
-				ball.hit(false);
-		}
+		checkHit(colObj, false);
 		if(ball.getY() > WINDOW_HEIGHT-20)
 		{
 			remove(ball);
@@ -258,7 +198,27 @@ public class Arkanoid extends GraphicsProgram
 		}
 	}
 	
-	public void checkBonus()
+	private void checkHit(GObject colObj, boolean vertical)
+	{
+		if(colObj != null)
+		{
+			if(colObj.getClass() == Brick.class)
+			{
+				bricks--;
+				remove(colObj);
+				ball.hit(vertical);
+				if(bonus == null && rand.nextInt(3) == 0)
+	            {
+					bonus = Bonus.getRandomBonus();
+	                 add(bonus, ball.getX(), ball.getY());
+	            }
+			}
+			else if(colObj.getClass() == UnbreakableBrick.class)
+				ball.hit(false);
+		}
+	}
+	
+	private void checkBonus()
 	{
 		if(bonus.getX()+bonus.getWidth() > board.getX() && bonus.getX() < board.getX()+board.getWidth() && bonus.getY()+bonus.getHeight() > board.getY())
 		{
@@ -285,7 +245,7 @@ public class Arkanoid extends GraphicsProgram
 		}
 	}
 	
-	public void checkWinOrLose()
+	private void checkWinOrLose()
 	{
 		if(ball == null)
 		{
