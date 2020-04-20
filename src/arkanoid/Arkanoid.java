@@ -251,7 +251,7 @@ public class Arkanoid extends GraphicsProgram
 			else if(colObj.getClass() == UnbreakableBrick.class)
 				ball.hit(false);
 		}
-		if(ball.getY() > WINDOW_HEIGHT)
+		if(ball.getY() > WINDOW_HEIGHT-20)
 		{
 			remove(ball);
 			ball = null;

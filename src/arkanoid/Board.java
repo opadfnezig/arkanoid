@@ -13,9 +13,6 @@ public class Board extends GImage{
 	
 	private double speed;
 	
-	private boolean bonusGrow;
-	private boolean bonusSpeed;
-	
 	public Board (String path, int w, int h)
 	{
 		super(path);
@@ -38,12 +35,10 @@ public class Board extends GImage{
 	public void grow()
 	{
 		this.scale(GROW_K, 1);
-		bonusGrow = true;
 	}
 	
 	public void decriase()
 	{
 		this.scale((double)1/GROW_K, 1);
-		bonusGrow = false;
 	}
 }
